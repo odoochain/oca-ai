@@ -2,12 +2,12 @@
 name = "odoo-addons-oca-ai"
 version = "18.0.20250918.0"
 dependencies = [
-    "odoo-addon-ai_oca_bridge==18.0.*",
-    "odoo-addon-ai_oca_bridge_document_page==18.0.*",
-    "odoo-addon-ai_oca_native_generate_ollama==18.0.*",
+    "odoo-addon-ai_oca_bridge==1.*",
+    "odoo-addon-ai_oca_bridge_document_page==1.*",
+    "odoo-addon-ai_oca_native_generate_ollama==1.*",
 ]
 classifiers=[
     "Programming Language :: Python",
     "Framework :: Odoo",
-    "Framework :: Odoo :: 18.0",
+    "Framework :: Odoo :: 19.0",
 ]
