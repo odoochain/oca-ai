@@ -16,4 +16,6 @@
     "demo": [
         "demo/ai_bridge_demo.xml",
     ],
+    "application": True,
+    "installable": True,
 }

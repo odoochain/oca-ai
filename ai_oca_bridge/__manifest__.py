@@ -11,7 +11,7 @@
     "author": "Dixmit,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/ai",
     "category": "AI",
-    "development_status": "Beta",
+    # "development_status": "Beta",
     "depends": ["mail"],
     "data": [
         "data/ir_module_category.xml",
@@ -32,4 +32,5 @@
         ],
     },
     "application": True,
+    "installable": True,
 }
