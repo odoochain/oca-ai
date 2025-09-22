@@ -1,0 +1,7 @@
+{
+  "title": "测试文档",
+  "content": "这是一个测试文档的内容",
+  "document_type": "page",
+  "tags": ["测试", "文档"],
+  "metadata": {"author": "系统管理员"}
+}

@@ -33,17 +33,17 @@ AI OCA Bridge Document Page 模块允许用户将 OCA 的 Knowledge 应用程序
 2. 访问 `AI Bridge > AI Bridge` 菜单
 3. 点击"创建"按钮
 4. 填写以下信息：
-   - **名称**: 文档页面 AI 桥接 - 创建
-   - **描述**: 当创建新文档页面时触发此 AI 桥接
-   - **模型**: 选择 "Document Page" 模型
-   - **使用场景**: 选择 "AI Thread Create"
-   - **URL**: 输入外部 AI 系统的 API 端点 URL（如 `https://api.example.com/ai/document/create`）
-   - **认证类型**: 根据外部系统要求选择，示例中为 "none"
-   - **载荷类型**: 根据端点配置选择，通常 "Record" 即可
-   - **结果类型**: 对于此场景，选择 "No processing"
-   - **结果处理方式**: 选择 "Immediate"
-   - **字段**: 添加至少外部端点期望的字段，如 content、display_name、draft_name 等
-   - **过滤器**: 添加域以限制仅对特定文档触发桥接
+   - **名称 (Name)**: 文档页面 AI 桥接 - 创建
+   - **描述 (Description)**: 当创建新文档页面时触发此 AI 桥接
+   - **模型 (Model)**: 选择 "Document Page" 模型
+   - **使用场景 (Usage)**: 选择 "AI Thread Create"
+   - **URL (URL)**: 输入你本地 Mirix 服务器的 API 端点 URL（如 `http://localhost:47283/ai/document/create`）
+   - **认证类型 (Auth Type)**: 根据外部系统要求选择，示例中为 "none"
+   - **载荷类型 (Payload Type)**: 根据端点配置选择，通常 "Record" 即可
+   - **结果类型 (Result Type)**: 对于此场景，选择 "No processing"
+   - **结果处理方式 (Result Management Or Result Kind)**: 选择 "Immediate"
+   - **字段 (Fields)**: 添加至少外部端点期望的字段，如 content、display_name、draft_name 等
+   - **过滤器 (Domain)**: 添加域以限制仅对特定文档触发桥接
 
 ### 2. 创建文档页面更新桥接
 
@@ -55,7 +55,7 @@ AI OCA Bridge Document Page 模块允许用户将 OCA 的 Knowledge 应用程序
    - **描述**: 当文档页面更新时触发此 AI 桥接
    - **模型**: 选择 "Document Page" 模型
    - **使用场景**: 选择 "AI Thread Write"
-   - **URL**: 输入外部 AI 系统的 API 端点 URL
+   - **URL**: 输入外部 AI 系统的 API 端点 URL（如 `http://localhost:47283/ai/document/update`）
    - **其他设置**: 与创建桥接类似，但确保配置适合更新操作
 
 ### 3. 创建文档页面删除桥接
@@ -81,6 +81,78 @@ AI OCA Bridge Document Page 模块允许用户将 OCA 的 Knowledge 应用程序
 3. 您可以在 `AI Bridge > AI Bridge Executions` 菜单中查看桥接执行的状态和结果
 
 ## 测试方法
+
+### 使用 Mirix 服务器测试
+
+本模块已配置为与 Mirix AI 服务器协同工作。以下是完整的测试配置步骤：
+
+#### 1. Mirix 服务器端点配置
+
+Mirix 服务器提供以下 API 端点：
+
+- **文档创建**: `POST http://localhost:47283/ai/document/create`
+- **文档列表**: `GET http://localhost:47283/api/v1/document`
+
+#### 2. 测试 Mirix 服务器连接
+
+在配置 Odoo 桥接之前，建议先测试 Mirix 服务器是否正常运行：
+
+**测试文档列表端点：**
+```bash
+curl -X GET http://localhost:47283/api/v1/document
+```
+
+**测试文档创建端点（Windows PowerShell）：**
+```powershell
+# 方法1：使用文件
+@'
+{
+  "title": "测试文档",
+  "content": "这是一个测试文档的内容",
+  "document_type": "page",
+  "tags": ["测试", "文档"],
+  "metadata": {"author": "系统管理员"}
+}
+'@ | Out-File -FilePath "test_document.json" -Encoding UTF8
+
+curl -X POST "http://localhost:47283/ai/document/create" `
+  -H "Content-Type: application/json" `
+  -d "@test_document.json"
+
+# 方法2：使用 Invoke-RestMethod
+$body = @{
+    title = "测试文档"
+    content = "这是一个测试文档的内容"
+    document_type = "page"
+    tags = @("测试", "文档")
+    metadata = @{author = "系统管理员"}
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost:47283/ai/document/create" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body $body
+```
+
+#### 3. Odoo 桥接配置验证
+
+配置完成后，验证桥接是否正常工作：
+
+1. **创建测试文档**：
+   - 在 Odoo 中创建一个新的文档页面
+   - 填写必要字段（content、display_name、draft_name）
+   - 保存文档
+
+2. **检查执行记录**：
+   - 访问 `AI Bridge > AI Bridge Executions` 菜单
+   - 查看最近的执行记录
+   - 确认状态为 "成功"
+
+3. **验证外部系统**：
+   - 使用文档列表 API 确认文档已同步
+   - 检查 Mirix 服务器的响应数据
+
+#### 4. 使用 n8n 工作流测试（可选）
 
 为了测试外部端点的功能，您可以使用模块提供的示例 n8n 工作流：
 

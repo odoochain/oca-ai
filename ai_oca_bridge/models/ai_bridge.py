@@ -7,6 +7,7 @@ import logging
 from datetime import date, datetime
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
@@ -150,7 +151,7 @@ class AiBridge(models.Model):
     def _check_payload_type_usage_compatibility(self):
         for record in self:
             if record.usage == "ai_thread_unlink" and record.payload_type != "none":
-                raise models.ValidationError(
+                raise ValidationError(
                     _(
                         "When usage is 'AI Thread Unlink', "
                         "the Payload Type must be 'No payload'."
