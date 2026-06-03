@@ -1,4 +1,7 @@
 
+[![Support the OCA](https://odoo-community.org/readme-banner-image)](https://odoo-community.org/get-involved?utm_source=repo-readme)
+
+# ai
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/ai&target_branch=18.0)
 [![Pre-commit Status](https://github.com/OCA/ai/actions/workflows/pre-commit.yml/badge.svg?branch=18.0)](https://github.com/OCA/ai/actions/workflows/pre-commit.yml?query=branch%3A18.0)
 [![Build Status](https://github.com/OCA/ai/actions/workflows/test.yml/badge.svg?branch=18.0)](https://github.com/OCA/ai/actions/workflows/test.yml?query=branch%3A18.0)
@@ -6,8 +9,6 @@
 [![Translation Status](https://translation.odoo-community.org/widgets/ai-18-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/ai-18-0/?utm_source=widget)
 
 <!-- /!\ do not modify above this line -->
-
-# ai
 
 ai
 
@@ -21,7 +22,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[ai_oca_bridge](ai_oca_bridge/) | 18.0.2.0.0 |  | Makes a basic configuration to be used as bridge with external AI systems
+[ai_oca_bridge](ai_oca_bridge/) | 18.0.2.0.1 |  | Makes a basic configuration to be used as bridge with external AI systems
 [ai_oca_bridge_chatter](ai_oca_bridge_chatter/) | 18.0.2.0.0 |  | Integrate a Bridge with a user that will use it on chatter
 [ai_oca_bridge_document_page](ai_oca_bridge_document_page/) | 18.0.1.0.0 |  | Adds Documents synchronization using AI Bridges
 [ai_oca_bridge_extra_parameters](ai_oca_bridge_extra_parameters/) | 18.0.1.0.0 | <a href='https://github.com/arielbarreiros96'><img src='https://github.com/arielbarreiros96.png' width='32' height='32' style='border-radius:50%;' alt='arielbarreiros96'/></a> | Adds extra parameters to the AI OCA Bridge payload.
